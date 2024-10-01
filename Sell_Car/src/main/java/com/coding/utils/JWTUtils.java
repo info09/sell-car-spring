@@ -12,19 +12,18 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 
 @Component
 public class JWTUtils {
     private Key getSigningKey(){
-        String SecretKey = "fcf700a4-042c-46f6-9678-110344583cb7";
+        String SecretKey = "mKfVZXw2pmu1JSyZCOPjQrsHJiqVyIf0RPnfmZ2i7+l+mcgEP/tbJ8sS5EpbGqotICRhnyGyj/1vlkdOrbM6QA==";
         byte[] keyBytes = Decoders.BASE64.decode(SecretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
     private Claims extractAllClaims(String token){
-        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
@@ -51,11 +50,11 @@ public class JWTUtils {
 
     private String generateToken(Map<String, Object> extractClaim, UserDetails userDetails){
         return Jwts.builder()
-                .setClaims(extractClaim)
-                .setSubject(userDetails.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .claims(extractClaim)
+                .subject(userDetails.getUsername())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
+                .signWith(getSigningKey())
                 .compact();
     }
 
