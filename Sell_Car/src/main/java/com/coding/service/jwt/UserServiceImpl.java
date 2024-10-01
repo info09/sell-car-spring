@@ -1,4 +1,4 @@
-package com.coding.service;
+package com.coding.service.jwt;
 
 import com.coding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
