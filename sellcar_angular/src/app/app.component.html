@@ -1,11 +1,11 @@
 <div>
   <nz-header
-    class="main-header"
+    class="main-header row"
     nz-row
     nzType="flex"
     style="background-color: #003973"
   >
-    <div>
+    <div class="columns-6">
       <a
         routerLink="/login"
         style="
@@ -17,19 +17,31 @@
         >Sell Car Service</a
       >
     </div>
-    <div class="nav-links">
+  </nz-header>
+  <!-- <nz-header
+    class="main-header row"
+    nz-row
+    nzType="flex"
+    style="background-color: #003973"
+  >
+    <div class="columns-6">
       <a
-        nz-button
-        nzType="link"
-        routerLink="/register"
-        routerLinkActive="active"
+        routerLink="/login"
+        style="
+          color: white;
+          margin-left: 50px;
+          font-size: 18px;
+          font-weight: bolder;
+        "
+        >Sell Car Service</a
       >
-        Sign Up
-      </a>
+    </div>
+    <div class="nav-links columns-4">
+      <button routerLink="/register" routerLinkActive="active">Sign Up</button>
       <a nz-button nzType="link" routerLink="/login" routerLinkActive="active"
         >Login</a
       >
     </div>
-  </nz-header>
+  </nz-header> -->
 </div>
 <router-outlet></router-outlet>
