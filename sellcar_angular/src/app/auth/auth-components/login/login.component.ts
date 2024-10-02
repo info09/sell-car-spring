@@ -28,23 +28,28 @@ export class LoginComponent {
 
   login() {
     console.log(this.loginForm.value);
-    this.authService.login(this.loginForm.value).subscribe((res) => {
-      console.log(res);
-      if (res.userId != null) {
-        const user = {
-          id: res.userId,
-          role: res.userRole,
-        };
-        StorageService.saveUser(user);
-        StorageService.saveToken(res.jwt);
-        if (StorageService.isAdminLoggedIn()) {
-          this.router.navigateByUrl('/admin/dashboard');
+    this.authService.login(this.loginForm.value).subscribe(
+      (res) => {
+        console.log(res);
+        if (res.userId != null) {
+          const user = {
+            id: res.userId,
+            role: res.userRole,
+          };
+          StorageService.saveUser(user);
+          StorageService.saveToken(res.jwt);
+          if (StorageService.isAdminLoggedIn()) {
+            this.router.navigateByUrl('/admin/dashboard');
+          } else {
+            this.router.navigateByUrl('/customer/dashboard');
+          }
         } else {
-          this.router.navigateByUrl('/customer/dashboard');
+          this.message.error('Bad credentials', { nzDuration: 5000 });
         }
-      } else {
-        this.message.error('Bad credentials', { nzDuration: 5000 });
+      },
+      (err) => {
+        this.message.error('Bad credentials');
       }
-    });
+    );
   }
 }

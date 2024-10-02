@@ -1,11 +1,16 @@
-<div>
+<div *ngIf="!isAdminLoggedIn && !isCustomerLoggedIn">
   <nz-header
-    class="main-header row"
+    class="main-header"
     nz-row
     nzType="flex"
-    style="background-color: #003973"
+    style="
+      background-color: #003973;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    "
   >
-    <div class="columns-6">
+    <div>
       <a
         routerLink="/login"
         style="
@@ -16,15 +21,27 @@
         "
         >Sell Car Service</a
       >
+    </div>
+    <div class="nav-links" style="margin-left: auto; margin-right: 50px">
+      <a nz-button routerLink="/register" routerLinkActive="active">Sign Up</a>
+      <a nz-button routerLink="/login" routerLinkActive="active">Login</a>
     </div>
   </nz-header>
-  <!-- <nz-header
-    class="main-header row"
+</div>
+
+<div *ngIf="isAdminLoggedIn">
+  <nz-header
+    class="main-header"
     nz-row
     nzType="flex"
-    style="background-color: #003973"
+    style="
+      background-color: #003973;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    "
   >
-    <div class="columns-6">
+    <div>
       <a
         routerLink="/login"
         style="
@@ -33,15 +50,48 @@
           font-size: 18px;
           font-weight: bolder;
         "
-        >Sell Car Service</a
+        >Admin</a
       >
     </div>
-    <div class="nav-links columns-4">
-      <button routerLink="/register" routerLinkActive="active">Sign Up</button>
-      <a nz-button nzType="link" routerLink="/login" routerLinkActive="active"
-        >Login</a
+    <div class="nav-links" style="margin-left: auto; margin-right: 50px">
+      <a nz-button routerLink="/admin/dashboard" routerLinkActive="active"
+        >Dashboard</a
+      >
+      <a nz-button (click)="logout()" routerLinkActive="active">Logout</a>
+    </div>
+  </nz-header>
+</div>
+
+<div *ngIf="isCustomerLoggedIn">
+  <nz-header
+    class="main-header"
+    nz-row
+    nzType="flex"
+    style="
+      background-color: #003973;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    "
+  >
+    <div>
+      <a
+        routerLink="/login"
+        style="
+          color: white;
+          margin-left: 50px;
+          font-size: 18px;
+          font-weight: bolder;
+        "
+        >Customer</a
       >
     </div>
-  </nz-header> -->
+    <div class="nav-links" style="margin-left: auto; margin-right: 50px">
+      <a nz-button routerLink="/customer/dashboard" routerLinkActive="active"
+        >Dashboard</a
+      >
+      <a nz-button (click)="logout()" routerLinkActive="active">Logout</a>
+    </div>
+  </nz-header>
 </div>
 <router-outlet></router-outlet>
