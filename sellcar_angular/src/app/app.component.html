@@ -1,1 +1,35 @@
+<div>
+  <nz-header
+    class="main-header"
+    nz-row
+    nzType="flex"
+    style="background-color: #003973"
+  >
+    <div>
+      <a
+        routerLink="/login"
+        style="
+          color: white;
+          margin-left: 50px;
+          font-size: 18px;
+          font-weight: bolder;
+        "
+        >Sell Car Service</a
+      >
+    </div>
+    <div class="nav-links">
+      <a
+        nz-button
+        nzType="link"
+        routerLink="/register"
+        routerLinkActive="active"
+      >
+        Sign Up
+      </a>
+      <a nz-button nzType="link" routerLink="/login" routerLinkActive="active"
+        >Login</a
+      >
+    </div>
+  </nz-header>
+</div>
 <router-outlet></router-outlet>
