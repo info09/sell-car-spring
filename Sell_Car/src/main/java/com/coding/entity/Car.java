@@ -23,9 +23,13 @@ public class Car {
     private String type;
     private String transmission;
     private String color;
-    private Date year;
+    private String year;
     private Boolean sold;
+    @Lob
+    @Column(columnDefinition = "longblob")
     private String description;
+    @Lob
+    @Column(columnDefinition = "longblob")
     private byte[] img;
     private Long price;
 
