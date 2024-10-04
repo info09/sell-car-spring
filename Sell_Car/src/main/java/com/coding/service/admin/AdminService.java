@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface AdminService {
     List<CarDTO> getCars();
+    CarDTO getCarById(Long id);
+    void deleteCarById(Long id);
 }

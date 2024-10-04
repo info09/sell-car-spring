@@ -27,4 +27,15 @@ public class CustomerController {
     public ResponseEntity<List<CarDTO>> getCars() {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.getCars());
     }
+
+    @GetMapping("/car/{id}")
+    public ResponseEntity<CarDTO> getCarById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.getCarById(id));
+    }
+
+    @DeleteMapping("/car/{id}")
+    public ResponseEntity<?> deleteCarById(@PathVariable Long id) {
+        customerService.deleteCarById(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
