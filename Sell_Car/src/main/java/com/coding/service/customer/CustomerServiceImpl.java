@@ -1,5 +1,6 @@
 package com.coding.service.customer;
 
+import com.coding.dto.AnalyticsDTO;
 import com.coding.dto.BidDTO;
 import com.coding.dto.CarDTO;
 import com.coding.dto.SearchDTO;
@@ -164,5 +165,13 @@ public class CustomerServiceImpl implements CustomerService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public AnalyticsDTO getAnalytics(Long userId) {
+        AnalyticsDTO analyticsDTO = new AnalyticsDTO();
+        analyticsDTO.setTotalCars(carRepository.countByUserId(userId));
+        analyticsDTO.setTotalSoldCars(carRepository.countByUserIdAndSoldTrue(userId));
+        return analyticsDTO;
     }
 }

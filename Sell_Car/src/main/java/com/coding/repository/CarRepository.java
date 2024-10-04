@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface CarRepository extends JpaRepository<Car, Long> {
     List<Car> findAllByUserId(Long id);
+
+    Long countByUserId(Long userId);
+
+    Long countByUserIdAndSoldTrue(Long userId);
 }

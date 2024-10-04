@@ -1,5 +1,6 @@
 package com.coding.service.customer;
 
+import com.coding.dto.AnalyticsDTO;
 import com.coding.dto.BidDTO;
 import com.coding.dto.CarDTO;
 import com.coding.dto.SearchDTO;
@@ -29,4 +30,6 @@ public interface CustomerService {
     List<BidDTO> getBidsByCarId(Long carId);
 
     boolean changeBidStatus(Long id, String status);
+
+    AnalyticsDTO getAnalytics(Long userId);
 }

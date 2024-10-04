@@ -1,5 +1,6 @@
 package com.coding.controller;
 
+import com.coding.dto.AnalyticsDTO;
 import com.coding.dto.BidDTO;
 import com.coding.dto.CarDTO;
 import com.coding.dto.SearchDTO;
@@ -77,5 +78,10 @@ public class CustomerController {
     public ResponseEntity<?> changeBidStatus(@PathVariable Long bidId, @PathVariable String status) {
         var result = customerService.changeBidStatus(bidId, status);
         return result ? ResponseEntity.status(HttpStatus.OK).build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @GetMapping("/car/analytics/{userId}")
+    public ResponseEntity<AnalyticsDTO> getAnalyticsByUserId(@PathVariable Long userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.getAnalytics(userId));
     }
 }
