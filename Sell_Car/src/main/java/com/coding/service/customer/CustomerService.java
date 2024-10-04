@@ -11,4 +11,6 @@ public interface CustomerService {
     List<CarDTO> getCars();
     CarDTO getCarById(Long id);
     void deleteCarById(Long id);
+
+    boolean updateCar(Long id, CarDTO carDTO) throws IOException;
 }

@@ -55,4 +55,25 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCarById(Long id) {
         carRepository.deleteById(id);
     }
+
+    @Override
+    public boolean updateCar(Long id, CarDTO carDTO) throws IOException {
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if (optionalCar.isPresent()){
+            Car car = optionalCar.get();
+            car.setName(carDTO.getName());
+            car.setBrand(carDTO.getBrand());
+            car.setType(carDTO.getType());
+            car.setTransmission(carDTO.getTransmission());
+            car.setColor(carDTO.getColor());
+            car.setYear(carDTO.getYear());
+            car.setDescription(carDTO.getDescription());
+            if (carDTO.getImg() != null)
+                car.setImg(carDTO.getImg().getBytes());
+            car.setPrice(carDTO.getPrice());
+            carRepository.save(car);
+            return true;
+        }
+        return false;
+    }
 }

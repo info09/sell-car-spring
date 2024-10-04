@@ -23,6 +23,12 @@ public class CustomerController {
         return result ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
+    @PutMapping("/car/{id}")
+    public ResponseEntity<?> updateCar(@PathVariable Long id, @ModelAttribute CarDTO carDTO) throws IOException {
+        var result =  customerService.updateCar(id, carDTO);
+        return result ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
     @GetMapping("/cars")
     public ResponseEntity<List<CarDTO>> getCars() {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.getCars());
