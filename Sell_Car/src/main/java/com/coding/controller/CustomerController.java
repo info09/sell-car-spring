@@ -62,4 +62,9 @@ public class CustomerController {
         var result = customerService.bidACar(bidDTO);
         return result ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+    @GetMapping("/car/bid/{userId}")
+    public ResponseEntity<List<BidDTO>> getBidsByUserId(@PathVariable Long userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.getBidsByUserId(userId));
+    }
 }

@@ -1,5 +1,6 @@
 package com.coding.entity;
 
+import com.coding.dto.BidDTO;
 import com.coding.enums.BidStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -33,4 +34,19 @@ public class Bid {
     private Car car;
 
     private BidStatus bidStatus;
+
+    public BidDTO getBidDto() {
+        return BidDTO.builder()
+                .id(id)
+                .price(price)
+                .userId(user.getId())
+                .carId(car.getId())
+                .bidStatus(bidStatus)
+                .email(user.getEmail())
+                .userName(user.getName())
+                .carBrand(car.getBrand())
+                .carName(car.getName())
+                .sellerName(car.getUser().getName())
+                .build();
+    }
 }
