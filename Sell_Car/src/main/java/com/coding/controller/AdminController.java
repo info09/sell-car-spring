@@ -1,6 +1,7 @@
 package com.coding.controller;
 
 import com.coding.dto.CarDTO;
+import com.coding.dto.SearchDTO;
 import com.coding.service.admin.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -37,5 +38,10 @@ public class AdminController {
     public ResponseEntity<?> updateCar(@PathVariable Long id, @ModelAttribute CarDTO carDTO) throws IOException {
         var result =  adminService.updateCar(id, carDTO);
         return result ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @GetMapping("/car/search")
+    public ResponseEntity<List<CarDTO>> searchCar(@RequestBody SearchDTO searchDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(adminService.searchCar(searchDTO));
     }
 }

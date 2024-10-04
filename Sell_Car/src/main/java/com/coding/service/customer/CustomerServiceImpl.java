@@ -1,11 +1,14 @@
 package com.coding.service.customer;
 
 import com.coding.dto.CarDTO;
+import com.coding.dto.SearchDTO;
 import com.coding.entity.Car;
 import com.coding.entity.User;
 import com.coding.repository.CarRepository;
 import com.coding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -75,5 +78,27 @@ public class CustomerServiceImpl implements CustomerService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<CarDTO> searchCar(SearchDTO searchDTO) {
+        Car car = Car.builder()
+                .type(searchDTO.getType())
+                .color(searchDTO.getColor())
+                .name(searchDTO.getName())
+                .brand(searchDTO.getBrand())
+                .year(searchDTO.getYear())
+                .transmission(searchDTO.getTransmission())
+                .build();
+
+        ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll()
+                .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("brand", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("transmission", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("color", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("year", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
+        Example<Car> example = Example.of(car, exampleMatcher);
+        return carRepository.findAll(example).stream().map(Car::getCarDto).collect(Collectors.toList());
     }
 }

@@ -1,6 +1,7 @@
 package com.coding.controller;
 
 import com.coding.dto.CarDTO;
+import com.coding.dto.SearchDTO;
 import com.coding.service.customer.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -43,5 +44,10 @@ public class CustomerController {
     public ResponseEntity<?> deleteCarById(@PathVariable Long id) {
         customerService.deleteCarById(id);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/car/search")
+    public ResponseEntity<List<CarDTO>> searchCar(@RequestBody SearchDTO searchDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.searchCar(searchDTO));
     }
 }
