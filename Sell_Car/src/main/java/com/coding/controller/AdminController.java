@@ -50,4 +50,10 @@ public class AdminController {
     public ResponseEntity<List<BidDTO>> getBids() {
         return ResponseEntity.status(HttpStatus.OK).body(adminService.getBids());
     }
+
+    @GetMapping("/car/bid/{bidId}/{status}")
+    public ResponseEntity<?> changeBidStatus(@PathVariable Long bidId, @PathVariable String status) {
+        var result = adminService.changeBidStatus(bidId, status);
+        return result ? ResponseEntity.status(HttpStatus.OK).build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
 }

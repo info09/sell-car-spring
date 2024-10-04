@@ -5,6 +5,7 @@ import com.coding.dto.CarDTO;
 import com.coding.dto.SearchDTO;
 import com.coding.entity.Bid;
 import com.coding.entity.Car;
+import com.coding.enums.BidStatus;
 import com.coding.repository.BidRepository;
 import com.coding.repository.CarRepository;
 import com.coding.repository.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -88,5 +90,21 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<BidDTO> getBids() {
         return bidRepository.findAll().stream().map(Bid::getBidDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean changeBidStatus(Long id, String status) {
+        Optional<Bid> optionalBid = bidRepository.findById(id);
+        if (optionalBid.isPresent()) {
+            Bid exsitingBid = optionalBid.get();
+            if (Objects.equals(status, BidStatus.APPROVED.name())) {
+                exsitingBid.setBidStatus(BidStatus.APPROVED);
+            } else {
+                exsitingBid.setBidStatus(BidStatus.REJECTED);
+            }
+            bidRepository.save(exsitingBid);
+            return true;
+        }
+        return false;
     }
 }

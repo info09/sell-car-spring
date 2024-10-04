@@ -67,4 +67,9 @@ public class CustomerController {
     public ResponseEntity<List<BidDTO>> getBidsByUserId(@PathVariable Long userId) {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.getBidsByUserId(userId));
     }
+
+    @GetMapping("/car/{carId}/bid")
+    public ResponseEntity<List<BidDTO>> getBidsByCarId(@PathVariable Long carId) {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.getBidsByCarId(carId));
+    }
 }
