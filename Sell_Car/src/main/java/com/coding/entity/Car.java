@@ -2,9 +2,7 @@ package com.coding.entity;
 
 import com.coding.dto.CarDTO;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -14,6 +12,8 @@ import java.util.Date;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,25 +33,25 @@ public class Car {
     private byte[] img;
     private Long price;
 
-     @ManyToOne(fetch =  FetchType.LAZY, optional = false)
-     @JoinColumn(name =  "user_id", nullable = false)
-     @OnDelete(action =  OnDeleteAction.CASCADE)
-     private User user;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User user;
 
-     public CarDTO getCarDto(){
-         return CarDTO.builder()
-                 .id(id)
-                 .name(name)
-                 .brand(brand)
-                 .type(type)
-                 .transmission(transmission)
-                 .color(color)
-                 .year(year)
-                 .sold(sold)
-                 .description(description)
-                 .price(price)
-                 .userId(user.getId())
-                 .returnedImg(img)
-                 .build();
-     }
+    public CarDTO getCarDto() {
+        return CarDTO.builder()
+                .id(id)
+                .name(name)
+                .brand(brand)
+                .type(type)
+                .transmission(transmission)
+                .color(color)
+                .year(year)
+                .sold(sold)
+                .description(description)
+                .price(price)
+                .userId(user.getId())
+                .returnedImg(img)
+                .build();
+    }
 }

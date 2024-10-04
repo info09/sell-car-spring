@@ -8,17 +8,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/customer")
 @CrossOrigin("*")
-public class CarController {
+public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping("/car")
     public ResponseEntity<?> addCar(@ModelAttribute CarDTO carDTO) throws IOException {
         var result =  customerService.createCar(carDTO);
         return result ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @GetMapping("/cars")
+    public ResponseEntity<List<CarDTO>> getCars() {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.getCars());
     }
 }
