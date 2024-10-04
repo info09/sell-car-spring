@@ -1,5 +1,6 @@
 package com.coding.controller;
 
+import com.coding.dto.BidDTO;
 import com.coding.dto.CarDTO;
 import com.coding.dto.SearchDTO;
 import com.coding.service.customer.CustomerService;
@@ -54,5 +55,11 @@ public class CustomerController {
     @GetMapping("/my-car")
     public ResponseEntity<List<CarDTO>> getMyCar() {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.getMyCar());
+    }
+
+    @PostMapping("/car/bid")
+    public ResponseEntity<?> bidACar(@RequestBody BidDTO bidDTO) {
+        var result = customerService.bidACar(bidDTO);
+        return result ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }

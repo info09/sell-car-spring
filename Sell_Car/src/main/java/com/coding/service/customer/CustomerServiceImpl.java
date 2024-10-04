@@ -1,9 +1,13 @@
 package com.coding.service.customer;
 
+import com.coding.dto.BidDTO;
 import com.coding.dto.CarDTO;
 import com.coding.dto.SearchDTO;
+import com.coding.entity.Bid;
 import com.coding.entity.Car;
 import com.coding.entity.User;
+import com.coding.enums.BidStatus;
+import com.coding.repository.BidRepository;
 import com.coding.repository.CarRepository;
 import com.coding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +26,7 @@ import java.util.stream.Collectors;
 public class CustomerServiceImpl implements CustomerService {
     private final UserRepository userRepository;
     private final CarRepository carRepository;
+    private final BidRepository bidRepository;
 
     @Override
     public boolean createCar(CarDTO carDTO) throws IOException {
@@ -109,5 +114,25 @@ public class CustomerServiceImpl implements CustomerService {
         var userName = SecurityContextHolder.getContext().getAuthentication().getName();
         var user = userRepository.findByEmail(userName);
         return user.map(value -> carRepository.findAllByUserId(value.getId()).stream().map(Car::getCarDto).collect(Collectors.toList())).orElse(null);
+    }
+
+    @Override
+    public boolean bidACar(BidDTO bidDTO) {
+        var userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        var optionalUser = userRepository.findByEmail(userName);
+        if (optionalUser.isPresent()) {
+            Optional<Car> optionalCar = carRepository.findById(bidDTO.getCarId());
+            if (optionalCar.isPresent()) {
+                Bid bid = Bid.builder()
+                        .user(optionalUser.get())
+                        .car(optionalCar.get())
+                        .price(bidDTO.getPrice())
+                        .bidStatus(BidStatus.PENDING)
+                        .build();
+                bidRepository.save(bid);
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,5 +1,6 @@
 package com.coding.service.customer;
 
+import com.coding.dto.BidDTO;
 import com.coding.dto.CarDTO;
 import com.coding.dto.SearchDTO;
 
@@ -20,4 +21,6 @@ public interface CustomerService {
     List<CarDTO> searchCar(SearchDTO searchDTO);
 
     List<CarDTO> getMyCar();
+
+    boolean bidACar(BidDTO bidDTO);
 }
