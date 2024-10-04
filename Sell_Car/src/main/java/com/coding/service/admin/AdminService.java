@@ -1,5 +1,6 @@
 package com.coding.service.admin;
 
+import com.coding.dto.BidDTO;
 import com.coding.dto.CarDTO;
 import com.coding.dto.SearchDTO;
 
@@ -17,4 +18,5 @@ public interface AdminService {
 
     List<CarDTO> searchCar(SearchDTO searchDTO);
 
+    List<BidDTO> getBids();
 }

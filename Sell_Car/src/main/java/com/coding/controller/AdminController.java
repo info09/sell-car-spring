@@ -1,5 +1,6 @@
 package com.coding.controller;
 
+import com.coding.dto.BidDTO;
 import com.coding.dto.CarDTO;
 import com.coding.dto.SearchDTO;
 import com.coding.service.admin.AdminService;
@@ -43,5 +44,10 @@ public class AdminController {
     @GetMapping("/car/search")
     public ResponseEntity<List<CarDTO>> searchCar(@RequestBody SearchDTO searchDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(adminService.searchCar(searchDTO));
+    }
+
+    @GetMapping("/car/bids")
+    public ResponseEntity<List<BidDTO>> getBids() {
+        return ResponseEntity.status(HttpStatus.OK).body(adminService.getBids());
     }
 }

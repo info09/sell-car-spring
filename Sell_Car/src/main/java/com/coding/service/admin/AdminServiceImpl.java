@@ -1,8 +1,11 @@
 package com.coding.service.admin;
 
+import com.coding.dto.BidDTO;
 import com.coding.dto.CarDTO;
 import com.coding.dto.SearchDTO;
+import com.coding.entity.Bid;
 import com.coding.entity.Car;
+import com.coding.repository.BidRepository;
 import com.coding.repository.CarRepository;
 import com.coding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,8 @@ import java.util.stream.Collectors;
 public class AdminServiceImpl implements AdminService {
     private final CarRepository carRepository;
     private final UserRepository userRepository;
+
+    private final BidRepository bidRepository;
 
     @Override
     public List<CarDTO> getCars() {
@@ -78,5 +83,10 @@ public class AdminServiceImpl implements AdminService {
                 .withMatcher("year", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
         Example<Car> example = Example.of(car, exampleMatcher);
         return carRepository.findAll(example).stream().map(Car::getCarDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BidDTO> getBids() {
+        return bidRepository.findAll().stream().map(Bid::getBidDto).collect(Collectors.toList());
     }
 }
