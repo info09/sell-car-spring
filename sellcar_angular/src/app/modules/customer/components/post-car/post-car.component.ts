@@ -26,6 +26,8 @@ export class PostCarComponent implements OnInit {
   listOfTransmission = ['Manual', 'Automatic'];
   postCarForm: FormGroup;
   isSpinning: boolean = false;
+  selectedFile: File | null;
+  imagePreview: string | ArrayBuffer | null;
 
   constructor(
     private customerService: CustomerService,
@@ -48,5 +50,19 @@ export class PostCarComponent implements OnInit {
 
   postCar() {
     console.log(this.postCarForm.value);
+    console.log(this.selectedFile);
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+    this.previewImage();
+  }
+
+  previewImage() {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
   }
 }
