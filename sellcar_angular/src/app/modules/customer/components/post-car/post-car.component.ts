@@ -25,6 +25,7 @@ export class PostCarComponent implements OnInit {
   listOfColor = ['Red', 'White', 'Blue', 'Black', 'Orange', 'Gray', 'Sliver'];
   listOfTransmission = ['Manual', 'Automatic'];
   postCarForm: FormGroup;
+  isSpinning: boolean = false;
 
   constructor(
     private customerService: CustomerService,
