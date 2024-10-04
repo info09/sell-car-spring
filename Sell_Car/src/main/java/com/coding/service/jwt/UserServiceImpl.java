@@ -1,5 +1,7 @@
 package com.coding.service.jwt;
 
+import com.coding.dto.UserDTO;
+import com.coding.entity.User;
 import com.coding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,8 +11,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+
     @Override
     public UserDetailsService userDetailsService() {
         return new UserDetailsService() {
@@ -19,5 +22,11 @@ public class UserServiceImpl implements UserService{
                 return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
             }
         };
+    }
+
+    @Override
+    public UserDTO getUserByEmail(String email) {
+        var user = userRepository.findByEmail(email);
+        return user.map(User::getUserDto).orElse(null);
     }
 }

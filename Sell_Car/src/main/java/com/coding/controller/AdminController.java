@@ -36,7 +36,7 @@ public class AdminController {
 
     @PutMapping("/car/{id}")
     public ResponseEntity<?> updateCar(@PathVariable Long id, @ModelAttribute CarDTO carDTO) throws IOException {
-        var result =  adminService.updateCar(id, carDTO);
+        var result = adminService.updateCar(id, carDTO);
         return result ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 

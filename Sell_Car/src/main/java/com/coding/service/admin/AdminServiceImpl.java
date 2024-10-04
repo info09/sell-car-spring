@@ -4,6 +4,7 @@ import com.coding.dto.CarDTO;
 import com.coding.dto.SearchDTO;
 import com.coding.entity.Car;
 import com.coding.repository.CarRepository;
+import com.coding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
     private final CarRepository carRepository;
+    private final UserRepository userRepository;
+
     @Override
     public List<CarDTO> getCars() {
         return carRepository.findAll().stream().map(Car::getCarDto).collect(Collectors.toList());
@@ -37,7 +40,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public boolean updateCar(Long id, CarDTO carDTO) throws IOException {
         Optional<Car> optionalCar = carRepository.findById(id);
-        if (optionalCar.isPresent()){
+        if (optionalCar.isPresent()) {
             Car car = optionalCar.get();
             car.setName(carDTO.getName());
             car.setBrand(carDTO.getBrand());

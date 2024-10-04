@@ -9,6 +9,7 @@ import com.coding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -19,24 +20,25 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
-    private final UserRepository  userRepository;
-    private final CarRepository  carRepository;
+    private final UserRepository userRepository;
+    private final CarRepository carRepository;
+
     @Override
     public boolean createCar(CarDTO carDTO) throws IOException {
-        Optional<User> optionalUser = userRepository.findById( carDTO.getUserId());
-        if (optionalUser.isPresent()){
+        Optional<User> optionalUser = userRepository.findById(carDTO.getUserId());
+        if (optionalUser.isPresent()) {
             Car car = Car.builder()
                     .name(carDTO.getName())
-                    .brand( carDTO.getBrand())
-                    .type( carDTO.getType())
-                    .transmission( carDTO.getTransmission())
-                    .color( carDTO.getColor())
-                    .year( carDTO.getYear())
-                    .sold( false)
-                    .description( carDTO.getDescription())
-                    .img( carDTO.getImg().getBytes())
-                    .price( carDTO.getPrice())
-                    .user( optionalUser.get()).build();
+                    .brand(carDTO.getBrand())
+                    .type(carDTO.getType())
+                    .transmission(carDTO.getTransmission())
+                    .color(carDTO.getColor())
+                    .year(carDTO.getYear())
+                    .sold(false)
+                    .description(carDTO.getDescription())
+                    .img(carDTO.getImg().getBytes())
+                    .price(carDTO.getPrice())
+                    .user(optionalUser.get()).build();
             carRepository.save(car);
             return true;
         }
@@ -62,7 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public boolean updateCar(Long id, CarDTO carDTO) throws IOException {
         Optional<Car> optionalCar = carRepository.findById(id);
-        if (optionalCar.isPresent()){
+        if (optionalCar.isPresent()) {
             Car car = optionalCar.get();
             car.setName(carDTO.getName());
             car.setBrand(carDTO.getBrand());
@@ -100,5 +102,12 @@ public class CustomerServiceImpl implements CustomerService {
                 .withMatcher("year", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
         Example<Car> example = Example.of(car, exampleMatcher);
         return carRepository.findAll(example).stream().map(Car::getCarDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CarDTO> getMyCar() {
+        var userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        var user = userRepository.findByEmail(userName);
+        return user.map(value -> carRepository.findAllByUserId(value.getId()).stream().map(Car::getCarDto).collect(Collectors.toList())).orElse(null);
     }
 }

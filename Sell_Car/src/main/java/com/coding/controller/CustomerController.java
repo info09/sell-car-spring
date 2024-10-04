@@ -20,13 +20,13 @@ public class CustomerController {
 
     @PostMapping("/car")
     public ResponseEntity<?> addCar(@ModelAttribute CarDTO carDTO) throws IOException {
-        var result =  customerService.createCar(carDTO);
+        var result = customerService.createCar(carDTO);
         return result ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @PutMapping("/car/{id}")
     public ResponseEntity<?> updateCar(@PathVariable Long id, @ModelAttribute CarDTO carDTO) throws IOException {
-        var result =  customerService.updateCar(id, carDTO);
+        var result = customerService.updateCar(id, carDTO);
         return result ? ResponseEntity.status(HttpStatus.CREATED).build() : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
@@ -49,5 +49,10 @@ public class CustomerController {
     @GetMapping("/car/search")
     public ResponseEntity<List<CarDTO>> searchCar(@RequestBody SearchDTO searchDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.searchCar(searchDTO));
+    }
+
+    @GetMapping("/my-car")
+    public ResponseEntity<List<CarDTO>> getMyCar() {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.getMyCar());
     }
 }

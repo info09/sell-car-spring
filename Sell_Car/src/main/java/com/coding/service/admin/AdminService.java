@@ -8,10 +8,13 @@ import java.util.List;
 
 public interface AdminService {
     List<CarDTO> getCars();
+
     CarDTO getCarById(Long id);
+
     void deleteCarById(Long id);
 
     boolean updateCar(Long id, CarDTO carDTO) throws IOException;
 
     List<CarDTO> searchCar(SearchDTO searchDTO);
+
 }
