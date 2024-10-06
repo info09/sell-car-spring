@@ -40,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
                     .type(carDTO.getType())
                     .transmission(carDTO.getTransmission())
                     .color(carDTO.getColor())
-                    .year(carDTO.getYear())
+                    .year(carDTO.getModelYear())
                     .sold(false)
                     .description(carDTO.getDescription())
                     .img(carDTO.getImg().getBytes())
