@@ -64,6 +64,12 @@ export class CustomerService {
     );
   }
 
+  changeStatusBid(id, status): Observable<any> {
+    return this.http.get(BASE_URL + `api/customer/car/bid/${id}/${status}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   createAuthorizationHeader(): HttpHeaders {
     let authHeaders: HttpHeaders = new HttpHeaders();
     return authHeaders.set(

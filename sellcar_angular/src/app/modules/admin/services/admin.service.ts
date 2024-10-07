@@ -15,6 +15,12 @@ export class AdminService {
     });
   }
 
+  getAllBids(): Observable<any> {
+    return this.http.get(BASE_URL + 'api/admin/car/bids', {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   createAuthorizationHeader(): HttpHeaders {
     let authHeaders: HttpHeaders = new HttpHeaders();
     return authHeaders.set(

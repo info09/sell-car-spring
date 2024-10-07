@@ -27,4 +27,22 @@ export class ViewMyBidsComponent implements OnInit {
       this.bids = result;
     });
   }
+
+  changeBookingStatus(id: number, status: string) {
+    this.isSpinning = true;
+    this.customerService.changeStatusBid(id, status).subscribe(
+      (result) => {
+        this.isSpinning = false;
+        this.message.success('Bid status changed successfully', {
+          nzDuration: 5000,
+        });
+        this.getByBid();
+      },
+      (err) => {
+        this.message.error('Bid status changed successfully', {
+          nzDuration: 5000,
+        });
+      }
+    );
+  }
 }

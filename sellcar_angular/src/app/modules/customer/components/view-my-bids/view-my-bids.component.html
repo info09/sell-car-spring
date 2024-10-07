@@ -13,6 +13,7 @@
           <th style="font-weight: bolder; color: #003973">Sell Name</th>
           <th style="font-weight: bolder; color: #003973">Price</th>
           <th style="font-weight: bolder; color: #003973">Status</th>
+          <th style="font-weight: bolder; color: #003973">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -34,6 +35,29 @@
             >
               {{ booking.bidStatus }}</strong
             >
+          </td>
+          <td>
+            <span *ngIf="booking.bidStatus == 'PENDING'">
+              <button
+                style="margin-left: 10px"
+                nz-button
+                nzSize="small"
+                nzType="primary"
+                (click)="changeBookingStatus(booking.id, 'APPROVED')"
+              >
+                APPROVED
+              </button>
+              <button
+                style="margin-left: 10px"
+                nz-button
+                nzSize="small"
+                nzType="primary"
+                nzDanger=""
+                (click)="changeBookingStatus(booking.id, 'REJECTED')"
+              >
+                APPROVED
+              </button>
+            </span>
           </td>
         </tr>
       </tbody>

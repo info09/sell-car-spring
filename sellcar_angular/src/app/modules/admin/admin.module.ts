@@ -5,17 +5,14 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { GetBookingsComponent } from './components/get-bookings/get-bookings.component';
 import { SearchCarComponent } from './components/search-car/search-car.component';
-
+import { DemoNgZorroAntdModule } from '../../DemoNgZorroAntdModule';
 
 @NgModule({
   declarations: [
     AdminDashboardComponent,
     GetBookingsComponent,
-    SearchCarComponent
+    SearchCarComponent,
   ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule
-  ]
+  imports: [CommonModule, AdminRoutingModule, DemoNgZorroAntdModule],
 })
-export class AdminModule { }
+export class AdminModule {}
