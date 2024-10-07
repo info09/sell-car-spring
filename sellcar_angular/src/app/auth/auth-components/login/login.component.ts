@@ -24,6 +24,14 @@ export class LoginComponent {
       email: [null, Validators.required],
       password: [null, Validators.required],
     });
+
+    if (StorageService.isCustomerLoggedIn()) {
+      this.router.navigateByUrl('/customer/dashboard');
+    }
+
+    if (StorageService.isAdminLoggedIn()) {
+      this.router.navigateByUrl('/admin/dashboard');
+    }
   }
 
   login() {

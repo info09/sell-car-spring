@@ -8,9 +8,10 @@ import { DemoNgZorroAntdModule } from '../../DemoNgZorroAntdModule';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MyCarsComponent } from './components/my-cars/my-cars.component';
+import { UpdateCarComponent } from './components/update-car/update-car.component';
 
 @NgModule({
-  declarations: [CustomerDashboardComponent, PostCarComponent, MyCarsComponent],
+  declarations: [CustomerDashboardComponent, PostCarComponent, MyCarsComponent, UpdateCarComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

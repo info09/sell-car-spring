@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-my-cars',
@@ -8,7 +9,10 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class MyCarsComponent implements OnInit {
   cars: any = [];
-  constructor(private customerService: CustomerService) {}
+  constructor(
+    private customerService: CustomerService,
+    private messageService: NzMessageService
+  ) {}
   ngOnInit(): void {
     this.getMyCars();
   }
@@ -17,6 +21,13 @@ export class MyCarsComponent implements OnInit {
     this.customerService.getMyCars().subscribe((result) => {
       console.log(result);
       this.cars = result;
+    });
+  }
+
+  deleteCar(id) {
+    this.customerService.deleteCar(id).subscribe((result) => {
+      this.messageService.success('Delete successfully', { nzDuration: 5000 });
+      this.getMyCars();
     });
   }
 }
