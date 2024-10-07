@@ -49,6 +49,21 @@ export class CustomerService {
     });
   }
 
+  addBidACar(formData: any): Observable<any> {
+    return this.http.post(BASE_URL + `api/customer/car/bid`, formData, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+  getMyBid(): Observable<any> {
+    return this.http.get(
+      BASE_URL + `api/customer/car/bid/${StorageService.getUserId()}`,
+      {
+        headers: this.createAuthorizationHeader(),
+      }
+    );
+  }
+
   createAuthorizationHeader(): HttpHeaders {
     let authHeaders: HttpHeaders = new HttpHeaders();
     return authHeaders.set(
