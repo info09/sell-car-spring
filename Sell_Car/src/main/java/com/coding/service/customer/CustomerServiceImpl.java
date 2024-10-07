@@ -112,10 +112,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CarDTO> getMyCar() {
-        var userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        var user = userRepository.findByEmail(userName);
-        return user.map(value -> carRepository.findAllByUserId(value.getId()).stream().map(Car::getCarDto).collect(Collectors.toList())).orElse(null);
+    public List<CarDTO> getMyCar(Long userId) {
+        return carRepository.findAllByUserId(userId).stream().map(Car::getCarDto).collect(Collectors.toList());
     }
 
     @Override

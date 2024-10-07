@@ -53,9 +53,9 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.searchCar(searchDTO));
     }
 
-    @GetMapping("/my-car")
-    public ResponseEntity<List<CarDTO>> getMyCar() {
-        return ResponseEntity.status(HttpStatus.OK).body(customerService.getMyCar());
+    @GetMapping("/my-car/{userId}")
+    public ResponseEntity<List<CarDTO>> getMyCar(@PathVariable Long userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.getMyCar(userId));
     }
 
     @PostMapping("/car/bid")

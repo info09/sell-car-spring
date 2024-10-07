@@ -7,9 +7,10 @@ import { PostCarComponent } from './components/post-car/post-car.component';
 import { DemoNgZorroAntdModule } from '../../DemoNgZorroAntdModule';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MyCarsComponent } from './components/my-cars/my-cars.component';
 
 @NgModule({
-  declarations: [CustomerDashboardComponent, PostCarComponent],
+  declarations: [CustomerDashboardComponent, PostCarComponent, MyCarsComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

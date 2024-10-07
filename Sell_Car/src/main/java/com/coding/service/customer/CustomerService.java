@@ -21,7 +21,7 @@ public interface CustomerService {
 
     List<CarDTO> searchCar(SearchDTO searchDTO);
 
-    List<CarDTO> getMyCar();
+    List<CarDTO> getMyCar(Long userId);
 
     boolean bidACar(BidDTO bidDTO);
 
