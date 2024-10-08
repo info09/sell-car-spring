@@ -64,6 +64,21 @@ export class CustomerService {
     );
   }
 
+  getBidByCardId(id): Observable<any> {
+    return this.http.get(BASE_URL + `api/customer/car/${id}/bid`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+  getAnalytics(): Observable<any> {
+    return this.http.get(
+      BASE_URL + `api/customer/car/analytics/${StorageService.getUserId()}`,
+      {
+        headers: this.createAuthorizationHeader(),
+      }
+    );
+  }
+
   changeStatusBid(id, status): Observable<any> {
     return this.http.get(BASE_URL + `api/customer/car/bid/${id}/${status}`, {
       headers: this.createAuthorizationHeader(),

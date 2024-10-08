@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -8,9 +9,11 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class CustomerDashboardComponent implements OnInit {
   cars: any = [];
+  analytics: any;
   constructor(private customerService: CustomerService) {}
   ngOnInit(): void {
     this.getCar();
+    this.getAnalytics();
   }
 
   getCar() {
@@ -19,4 +22,16 @@ export class CustomerDashboardComponent implements OnInit {
       this.cars = result;
     });
   }
+
+  getAnalytics() {
+    this.customerService.getAnalytics().subscribe((result) => {
+      console.log(result);
+      this.analytics = result;
+    });
+  }
+
+  gridStyle = {
+    with: '50%',
+    textAlign: 'center',
+  };
 }

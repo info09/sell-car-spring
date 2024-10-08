@@ -26,6 +26,25 @@
 
         <div style="float: right">
           <button
+            nz-button
+            nzSize="small"
+            nzDanger
+            *ngIf="car.sold"
+            style="margin-right: 10px"
+            nzType="primary"
+          >
+            Sold
+          </button>
+          <button
+            nzSize="small"
+            nz-button
+            nzType="primary"
+            style="margin-right: 10px"
+            routerLink="/customer/manage-bids/{{ car.id }}"
+          >
+            Manage Bids
+          </button>
+          <button
             nzSize="small"
             nz-button
             nzType="primary"

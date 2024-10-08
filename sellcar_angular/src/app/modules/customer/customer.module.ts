@@ -11,9 +11,10 @@ import { MyCarsComponent } from './components/my-cars/my-cars.component';
 import { UpdateCarComponent } from './components/update-car/update-car.component';
 import { BookACarComponent } from './components/book-a-car/book-a-car.component';
 import { ViewMyBidsComponent } from './components/view-my-bids/view-my-bids.component';
+import { ManageBidsComponent } from './components/manage-bids/manage-bids.component';
 
 @NgModule({
-  declarations: [CustomerDashboardComponent, PostCarComponent, MyCarsComponent, UpdateCarComponent, BookACarComponent, ViewMyBidsComponent],
+  declarations: [CustomerDashboardComponent, PostCarComponent, MyCarsComponent, UpdateCarComponent, BookACarComponent, ViewMyBidsComponent, ManageBidsComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

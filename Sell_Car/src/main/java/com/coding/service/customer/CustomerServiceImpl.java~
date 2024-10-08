@@ -156,7 +156,6 @@ public class CustomerServiceImpl implements CustomerService {
             }
             if (Objects.equals(status, BidStatus.APPROVED.name())) {
                 exsitingBid.setBidStatus(BidStatus.APPROVED);
-                exsitingBid.getCar().setSold(true);
             } else {
                 exsitingBid.setBidStatus(BidStatus.REJECTED);
             }
